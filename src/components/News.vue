@@ -1,0 +1,97 @@
+<template>
+  <div class="news">
+    <div class="news-card">
+      <div class="row">
+        <div class="col-12 col-md-8 col-sm-8">
+          <div class="title-news">Uptodated</div>
+          <div class="card card-content" v-for="headlines in headline.slice(0,8)" :key="headlines.id">
+            <div class="row no-gutters">
+              <div class="col-md-3">
+                <img :src="headlines.poster" class="card-img" alt="">
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <h5 class="card-title">{{headlines.judul}}</h5>
+                  <p class="card-text">{{headlines.waktu}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4 col-sm-4">
+          <div class="title-news">Populer Search</div>
+          <div class="card list-card">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+            <div class="card-footer">
+              Card footer
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  data () {
+    return{
+      headline : []
+    }
+  },
+
+  method (data) {
+    this.headline = data
+  },
+
+  mounted () {
+    axios
+      .get('https://berita-news.herokuapp.com/nasional')
+      .then((Res) => {
+        this.headline = Res.data.data
+        console.log(Res.data);
+      })
+      .catch(Err => {
+        console.log(Err)
+      })
+  }
+}
+</script>
+
+<style>
+.news {
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.title-news {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  font-size: 15pt;
+  margin: 5px;
+  margin-bottom: 3px;
+}
+
+.card-content {
+  box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+/* .card-img {
+  min-height: 120px;
+  max-height: 120px;
+  min-width: 140px;
+  max-width: 140px;
+} */
+.list-card {
+  box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+}
+</style>
