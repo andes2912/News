@@ -1,5 +1,7 @@
 # news
 
+#UNDER DEVELOPMENT !
+
 ## Project setup
 ```
 npm install
