@@ -7,12 +7,12 @@
           <div class="card card-content" v-for="headlines in headline.slice(0,8)" :key="headlines.id">
             <div class="row no-gutters">
               <div class="col-md-3">
-                <img :src="headlines.poster" class="card-img" alt="">
+                <img :src="headlines.urlToImage" class="card-img" alt="">
               </div>
               <div class="col-md-9">
                 <div class="card-body">
-                  <h5 class="card-title">{{headlines.judul}}</h5>
-                  <p class="card-text">{{headlines.waktu}}</p>
+                  <h5 class="card-title">{{headlines.title}}</h5>
+                  <p class="card-text">{{headlines.publishedAt}}</p>
                 </div>
               </div>
             </div>
@@ -51,15 +51,16 @@ export default {
   },
 
   mounted () {
-    axios
-      .get('https://berita-news.herokuapp.com/nasional')
-      .then((Res) => {
-        this.headline = Res.data.data
-        console.log(Res.data);
-      })
-      .catch(Err => {
-        console.log(Err)
-      })
+    const api_key = process.env.VUE_APP_API_KEY
+      axios
+        .get(`http://localhost:8080/v2/top-headlines?country=id&apiKey=${api_key}`)
+        .then((Response) => {
+          this.headline = Response.data.articles
+          console.log(Response.data.articles[0]);
+        })
+        .catch((Error) => {
+          console.log(Error);
+        })
   }
 }
 </script>
@@ -84,12 +85,6 @@ export default {
   margin-bottom: 5px;
 }
 
-/* .card-img {
-  min-height: 120px;
-  max-height: 120px;
-  min-width: 140px;
-  max-width: 140px;
-} */
 .list-card {
   box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 4px;

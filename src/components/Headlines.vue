@@ -4,9 +4,10 @@
     <div class="title-card">Headlines</div>
     <div class="headlines-card">
       <div class="card" v-for="headlines in headline.slice(0,4)" :key="headlines.id">
-          <img :src="headlines.poster" class="card-img-top" alt="">
+          <img :src="headlines.urlToImage" class="card-img-top" alt="">
           <div class="card-body">
-            <p class="card-text">{{headlines.judul}}</p>
+            <h5 class="card-title">{{headlines.title}}</h5>
+            <p class="card-text">{{headlines.publishedAt}}</p>
           </div>
       </div>
     </div>
@@ -25,20 +26,26 @@ export default {
     }
   },
 
-  method (data) {
-    this.headline = data
+  methods: {
+    setData (data) {
+      this.headline = data
+    },
+    getApi () {
+      const api_key = process.env.VUE_APP_API_KEY
+      axios
+        .get(`http://localhost:8080/v2/top-headlines?country=id&apiKey=${api_key}`)
+        .then((Response) => {
+          this.headline = Response.data.articles
+          console.log(Response.data.articles[0]);
+        })
+        .catch((Error) => {
+          console.log(Error);
+        })
+    }
   },
 
   mounted () {
-    axios
-      .get('https://berita-news.herokuapp.com/nasional')
-      .then((Res) => {
-        this.headline = Res.data.data
-        console.log(Res.data);
-      })
-      .catch(Err => {
-        console.log(Err)
-      })
+    this.getApi()
   }
 }
 </script>

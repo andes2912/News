@@ -9,11 +9,12 @@ import 'jquery/dist/jquery.min'
 import 'popper.js/dist/popper.min'
 import 'bootstrap/dist/js/bootstrap.min'
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
+// axios.defaults.baseURL = process.env.VUE_APP_BASE_URL
 
-// axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded'
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.get['Content-Type'] ='application/x-www-form-urlencoded';
+// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+// axios.defaults.headers.common['Access-Control-Allow-Methods'] = 'GET';
+// axios.defaults.headers.common['Access-Control-Allow-Headers'] ='authorization, x-api-key';
 
 new Vue({
   router,
