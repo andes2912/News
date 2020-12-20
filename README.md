@@ -1,6 +1,6 @@
 # news
 
-#UNDER DEVELOPMENT !
+## UNDER DEVELOPMENT !
 
 ## Project setup
 ```
