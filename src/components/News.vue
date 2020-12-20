@@ -3,15 +3,15 @@
     <div class="news-card">
       <div class="row">
         <div class="col-12 col-md-8 col-sm-8">
-          <div class="title-news">Uptodated</div>
-          <div class="card card-content" v-for="headlines in headline.slice(0,8)" :key="headlines.id">
+          <div class="title-news">NEWS TECHNOLOGY</div>
+          <div class="card card-content" v-for="headlines in headline" :key="headlines.id">
             <div class="row no-gutters">
               <div class="col-md-3">
                 <img :src="headlines.urlToImage" class="card-img" alt="">
               </div>
               <div class="col-md-9">
                 <div class="card-body">
-                  <h5 class="card-title">{{headlines.title}}</h5>
+                  <router-link :to="'detail/' + headlines.url" target="_blank"><h5 class="card-title">{{headlines.title}}</h5></router-link>
                   <p class="card-text">{{headlines.publishedAt}}</p>
                 </div>
               </div>
@@ -53,10 +53,10 @@ export default {
   mounted () {
     const api_key = process.env.VUE_APP_API_KEY
       axios
-        .get(`http://localhost:8080/v2/top-headlines?country=id&apiKey=${api_key}`)
+        .get(`http://localhost:8080/v2/top-headlines?country=id&category=technology&apiKey=${api_key}&page=1`)
         .then((Response) => {
           this.headline = Response.data.articles
-          console.log(Response.data.articles[0]);
+          console.log(Response.data);
         })
         .catch((Error) => {
           console.log(Error);
@@ -67,7 +67,7 @@ export default {
 
 <style>
 .news {
-  margin-top: 5%;
+  margin-top: 1%;
   margin-bottom: 5%;
 }
 

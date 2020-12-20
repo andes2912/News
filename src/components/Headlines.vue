@@ -36,7 +36,6 @@ export default {
         .get(`http://localhost:8080/v2/top-headlines?country=id&apiKey=${api_key}`)
         .then((Response) => {
           this.headline = Response.data.articles
-          console.log(Response.data.articles[0]);
         })
         .catch((Error) => {
           console.log(Error);
