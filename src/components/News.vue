@@ -11,8 +11,10 @@
               </div>
               <div class="col-md-9">
                 <div class="card-body">
-                  <router-link :to="'detail/' + headlines.url" target="_blank"><h5 class="card-title">{{headlines.title}}</h5></router-link>
-                  <p class="card-text">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
+                  <router-link :to="'detail/' + headlines.url" target="_blank">
+                  <h6 class="card-title">{{headlines.title}}</h6>
+                  </router-link>
+                  <p class="small">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
                 </div>
               </div>
             </div>

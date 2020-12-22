@@ -6,8 +6,8 @@
       <div class="card" v-for="headlines in headline.slice(0,4)" :key="headlines.id">
           <img :src="headlines.urlToImage" class="card-img-top" alt="">
           <div class="card-body">
-            <h5 class="card-title">{{headlines.title}}</h5>
-            <p class="card-text">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
+            <h6 class="card-title">{{headlines.title}}</h6>
+            <p class="small">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
           </div>
       </div>
     </div>
