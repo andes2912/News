@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="card-columns">
+    <div class="card-columns" v-if="headline.length > 0">
       <div class="card cards" v-for="headlines in headline" :key="headlines.index">
         <img :src="headlines.urlToImage" class="card-img-top" alt="">
         <div class="card-body">
@@ -8,6 +8,9 @@
           <p class="small">{{headlines.description}}</p>
         </div>
       </div>
+    </div>
+    <div v-else>
+      <p class="text-center mt-5">Ups, Server Error ! {{Error}} </p>
     </div>
   </div>
 </template>

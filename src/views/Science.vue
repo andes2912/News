@@ -10,7 +10,7 @@
       </div>
     </div>
     <div v-else>
-      <p class="text-center mt-5">Items Not Found !</p>
+      <p class="text-center mt-5">Ups, Server Error ! {{Error}} </p>
     </div>
   </div>
 </template>
@@ -22,7 +22,8 @@ import moment from 'moment'
 export default {
   data () {
     return{
-      headline : []
+      headline : [],
+      Error : []
     }
   },
 
@@ -49,7 +50,7 @@ export default {
         .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=1`)
         .then((Response) => {
           this.headline = Response.data.articles
-          // console.log(Response.data);
+          console.log(Response.data.code);
         })
         .catch((Error) => {
           console.log(Error);
