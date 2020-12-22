@@ -7,7 +7,7 @@
           <img :src="headlines.urlToImage" class="card-img-top" alt="">
           <div class="card-body">
             <h5 class="card-title">{{headlines.title}}</h5>
-            <p class="card-text">{{headlines.publishedAt}}</p>
+            <p class="card-text">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
           </div>
       </div>
     </div>
@@ -19,10 +19,20 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
+
 export default {
   data () {
     return{
       headline : []
+    }
+  },
+  filters: {
+    dtSubtract (dt, duration, unit) {
+      return moment.utc(dt).subtract(duration, unit)
+    },
+    dtFormat (dt, format) {
+      return moment.utc(dt).format(format)
     }
   },
 
@@ -32,8 +42,11 @@ export default {
     },
     getApi () {
       const api_key = process.env.VUE_APP_API_KEY
+      const BaseUrl = process.env.VUE_APP_BASE_URL
+      const Country = 'id'
+
       axios
-        .get(`http://localhost:8080/v2/top-headlines?country=id&apiKey=${api_key}`)
+        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&apiKey=${api_key}`)
         .then((Response) => {
           this.headline = Response.data.articles
         })
@@ -41,6 +54,7 @@ export default {
           console.log(Error);
         })
     }
+
   },
 
   mounted () {

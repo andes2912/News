@@ -19,8 +19,11 @@ data () {
 
   mounted () {
     const api_key = process.env.VUE_APP_API_KEY
+    const BaseUrl = process.env.VUE_APP_BASE_URL
+    const Country = 'id'
+    const Category = 'technology'
       axios
-        .get(`http://localhost:8080/v2/top-headlines?country=id&category=technology&apiKey=${api_key}` + this.$route.params.url)
+        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}` + this.$route.params.url)
         .then((Response) => {
           this.headline = Response.data.articles
           console.log('halo');

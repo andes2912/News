@@ -12,7 +12,7 @@
               <div class="col-md-9">
                 <div class="card-body">
                   <router-link :to="'detail/' + headlines.url" target="_blank"><h5 class="card-title">{{headlines.title}}</h5></router-link>
-                  <p class="card-text">{{headlines.publishedAt}}</p>
+                  <p class="card-text">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
                 </div>
               </div>
             </div>
@@ -39,10 +39,21 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
+
 export default {
   data () {
     return{
       headline : []
+    }
+  },
+
+  filters: {
+    dtSubtract (dt, duration, unit) {
+      return moment.utc(dt).subtract(duration, unit)
+    },
+    dtFormat (dt, format) {
+      return moment.utc(dt).format(format)
     }
   },
 
@@ -52,8 +63,12 @@ export default {
 
   mounted () {
     const api_key = process.env.VUE_APP_API_KEY
+    const BaseUrl = process.env.VUE_APP_BASE_URL
+    const Country = 'id'
+    const Category = 'technology'
+
       axios
-        .get(`http://localhost:8080/v2/top-headlines?country=id&category=technology&apiKey=${api_key}&page=1`)
+        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=1`)
         .then((Response) => {
           this.headline = Response.data.articles
           console.log(Response.data);
