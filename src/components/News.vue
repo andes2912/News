@@ -1,38 +1,11 @@
 <template>
-  <div class="news">
-    <div class="news-card">
-      <div class="row">
-        <div class="col-12 col-md-8 col-sm-8">
-          <div class="title-news">NEWS UPDATED</div>
-          <div class="card card-content" v-for="headlines in headline" :key="headlines.id">
-            <div class="row no-gutters">
-              <div class="col-md-3">
-                <img :src="headlines.urlToImage" class="card-img" alt="">
-              </div>
-              <div class="col-md-9">
-                <div class="card-body">
-                  <router-link :to="'detail/' + headlines.url" target="_blank">
-                  <h6 class="card-title">{{headlines.title}}</h6>
-                  </router-link>
-                  <p class="small">{{headlines.publishedAt | dtSubtract(1, 'hour') | dtFormat('HH:mm:ss')}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 col-sm-4">
-          <div class="title-news">Populer Search</div>
-          <div class="card list-card">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Cras justo odio</li>
-              <li class="list-group-item">Dapibus ac facilisis in</li>
-              <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
-            <div class="card-footer">
-              Card footer
-            </div>
-          </div>
+  <div class="container">
+    <div class="card-columns">
+      <div class="card cards" v-for="headlines in headline" :key="headlines.index">
+        <img :src="headlines.urlToImage" class="card-img-top" alt="">
+        <div class="card-body">
+          <h6 class="card-title">{{headlines.title}}</h6>
+          <p class="small">{{headlines.description}}</p>
         </div>
       </div>
     </div>
@@ -67,11 +40,10 @@ export default {
     const api_key = process.env.VUE_APP_API_KEY
     const BaseUrl = process.env.VUE_APP_BASE_URL
     const Country = 'id'
-    // const Category = 'technology'
-    const Page = [1]
+    const Category = ''
 
       axios
-        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&page=${Page}&apiKey=${api_key}`)
+        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=1`)
         .then((Response) => {
           this.headline = Response.data.articles
           console.log(Response.data);
@@ -84,27 +56,11 @@ export default {
 </script>
 
 <style>
-.news {
-  margin-top: 1%;
-  margin-bottom: 5%;
-}
-
-.title-news {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 600;
-  font-size: 15pt;
-  margin: 5px;
-  margin-bottom: 3px;
-}
-
-.card-content {
+.cards {
+  margin-top: 5%;
   box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
-  margin-bottom: 5px;
-}
-
-.list-card {
-  box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 4px;
+  max-height: 400px;
+  min-height: 400px;
 }
 </style>
