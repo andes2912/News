@@ -17,6 +17,12 @@ const routes = [
   },
 
   {
+    name: '/technology/',
+    path: '/technology/',
+    component: () => import('../views/Technology.vue')
+  },
+
+  {
     name: '/science/',
     path: '/science/',
     component: () => import('../views/Science.vue')

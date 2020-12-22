@@ -40,11 +40,10 @@ export default {
     const api_key = process.env.VUE_APP_API_KEY
     const BaseUrl = process.env.VUE_APP_BASE_URL
     const Country = 'id'
-    const Category = ''
-    const Page  = [1]
+    const Category = 'technology'
 
       axios
-        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&page=${Page}&apiKey=${api_key}&page=1`)
+        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=1`)
         .then((Response) => {
           this.headline = Response.data.articles
           console.log(Response.data);
