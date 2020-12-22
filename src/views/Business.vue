@@ -10,7 +10,7 @@
       </div>
     </div>
     <div v-else>
-      <p class="text-center mt-5">Ups, Server Error ! {{Error}} </p>
+      <p class="text-center mt-5">Ups, Server Error ! </p>
     </div>
   </div>
 </template>
