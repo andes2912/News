@@ -63,4 +63,9 @@ export default {
   max-height: 400px;
   min-height: 400px;
 }
+
+.cards .card-img-top {
+  max-height: 200px;
+  min-height: 200px;
+}
 </style>
