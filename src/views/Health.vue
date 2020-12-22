@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="card-columns">
-      <div class="card" v-for="headlines in headline" :key="headlines.index">
+      <div class="card cards" v-for="headlines in headline" :key="headlines.index">
         <img :src="headlines.urlToImage" class="card-img-top" alt="">
         <div class="card-body">
           <h6 class="card-title">{{headlines.title}}</h6>
@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style>
-.card {
+.cards {
   margin-top: 5%;
   box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
