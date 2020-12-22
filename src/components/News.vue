@@ -3,7 +3,7 @@
     <div class="news-card">
       <div class="row">
         <div class="col-12 col-md-8 col-sm-8">
-          <div class="title-news">NEWS TECHNOLOGY</div>
+          <div class="title-news">NEWS UPDATED</div>
           <div class="card card-content" v-for="headlines in headline" :key="headlines.id">
             <div class="row no-gutters">
               <div class="col-md-3">
@@ -67,10 +67,11 @@ export default {
     const api_key = process.env.VUE_APP_API_KEY
     const BaseUrl = process.env.VUE_APP_BASE_URL
     const Country = 'id'
-    const Category = 'technology'
+    // const Category = 'technology'
+    const Page = [1]
 
       axios
-        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=1`)
+        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&page=${Page}&apiKey=${api_key}`)
         .then((Response) => {
           this.headline = Response.data.articles
           console.log(Response.data);
