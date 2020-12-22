@@ -8,6 +8,7 @@
           <p class="small">{{headlines.description}}</p>
         </div>
       </div>
+      <div v-if="headline.length" v-observe-visibility="visibilityChanged"></div>
     </div>
   </div>
 </template>
@@ -19,7 +20,8 @@ import moment from 'moment'
 export default {
   data () {
     return{
-      headline : []
+      headline : [],
+      page: 1
     }
   },
 
@@ -32,26 +34,32 @@ export default {
     }
   },
 
-  method (data) {
-    this.headline = data
+  methods: {
+    async fetch() {
+
+      const api_key = process.env.VUE_APP_API_KEY
+      const BaseUrl = process.env.VUE_APP_BASE_URL
+      const Country = 'id'
+      const Category = ''
+
+      let headline = await axios.get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=${this.page}`)
+
+      this.headline.push(...headline.data.articles)
+    },
+
+    visibilityChanged (isVisible) {
+      if (!isVisible) {
+        return
+      }
+
+      this.page++
+
+      this.fetch()
+    }
   },
 
   mounted () {
-    const api_key = process.env.VUE_APP_API_KEY
-    const BaseUrl = process.env.VUE_APP_BASE_URL
-    const Country = 'id'
-    const Category = ''
-    const Page  = [1]
-
-      axios
-        .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&page=${Page}&apiKey=${api_key}&page=1`)
-        .then((Response) => {
-          this.headline = Response.data.articles
-          console.log(Response.data);
-        })
-        .catch((Error) => {
-          console.log(Error);
-        })
+    this.fetch()
   }
 }
 </script>

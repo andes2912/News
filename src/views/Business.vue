@@ -46,7 +46,7 @@ export default {
         .get(`${BaseUrl}/v2/top-headlines?country=${Country}&category=${Category}&apiKey=${api_key}&page=1`)
         .then((Response) => {
           this.headline = Response.data.articles
-          console.log(Response.data);
+          // console.log(Response.data);
         })
         .catch((Error) => {
           console.log(Error);
