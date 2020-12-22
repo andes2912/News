@@ -14,6 +14,36 @@ const routes = [
     name: '/detail/',
     path: '/detail/:url',
     component: () => import('../views/Detail.vue')
+  },
+
+  {
+    name: '/science/',
+    path: '/science/',
+    component: () => import('../views/Science.vue')
+  },
+
+  {
+    name: '/health/',
+    path: '/health/',
+    component: () => import('../views/Health.vue')
+  },
+
+  {
+    name: '/sports/',
+    path: '/sports/',
+    component: () => import('../views/Sports.vue')
+  },
+
+  {
+    name: '/business/',
+    path: '/business/',
+    component: () => import('../views/Business.vue')
+  },
+
+  {
+    name: '/entertainment/',
+    path: '/entertainment/',
+    component: () => import('../views/Entertainment.vue')
   }
 ]
 
