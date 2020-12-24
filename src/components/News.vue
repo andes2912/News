@@ -8,8 +8,8 @@
           <p class="small">{{headlines.description}}</p>
         </div>
       </div>
-      <div v-if="headline.length" v-observe-visibility="visibilityChanged"></div>
     </div>
+      <div v-if="headline.length" v-observe-visibility="visibilityChanged"></div>
     <div v-else>
       <img src="../assets/error.png" alt="Error" width="80%">
       <p class="small text-center">Ups, Server Error !</p>
