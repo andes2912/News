@@ -5,7 +5,7 @@
         <img :src="headlines.urlToImage" class="card-img-top" alt="">
         <div class="card-body">
           <h6 class="card-title">{{headlines.title}}</h6>
-          <p class="small">{{headlines.description}}</p>
+          <p class="small">{{headlines.description }}</p>
         </div>
       </div>
     </div>
@@ -73,7 +73,12 @@ export default {
   margin-top: 5%;
   box-shadow: 0 4px 10px 0 rgba(0, 0.9, 0.6, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
-  max-height: 400px;
-  min-height: 400px;
+  max-height: 435px;
+  min-height: 435px;
+}
+
+.cards .card-img-top {
+  max-height: 200px;
+  min-height: 200px;
 }
 </style>
